@@ -1,17 +1,42 @@
-var express = require('express'),
+ var express = require('express'),
     request = require('request'),
-    app     = express(),
-    server;
+     app     = express(),
+     server;
+//
+// app.engine('ejs', require('ejs').renderFile);
+// app.set('view engine', 'ejs');
+
+app.use(express.static(__dirname + '/public'));
+
+
+
+
 
 app.get('/representatives/:state',
   findRepresentativesByState,
   jsonResponse
+  // sendData
 );
 
 app.get('/senators/:state',
   findSenatorsByState,
   jsonResponse
 );
+
+app.get('*', function(req, res, next){
+  res.sendfile('./public/home.html')
+});
+
+// function sendData(req,res, next) {
+//     console.log(req.params.zip);
+//      var query = City.find({"zip" : req.params.zip})
+//      query.exec(function(err, city) {
+//         if (err)
+//             res.send(err);
+//         console.log(city);
+//         res.json(city);
+//     });
+// }
 
 function findRepresentativesByState(req, res, next) {
   var url = 'http://whoismyrepresentative.com/getall_reps_bystate.php?state={0}&output=json'.replace('{0}', req.params.state);
@@ -32,17 +57,26 @@ function handleApiResponse(res, next) {
       };
       return next();
     }
-    res.locals = {
+    res.locals = [{
       success: true,
       results: JSON.parse(body).results
-    }
+    }]
     return next();
   };
 }
 
 function jsonResponse(req, res, next) {
-  return res.json(res.locals);
+  res.jsonp(res.locals)  //res.locals
 }
+
+// function getPage(req, res, next){
+//   var json = JSON.parse(JSON.stringify((res.locals).results));
+//   // json = json.slice(1, -1);
+//   // json = JSON.parse(json)
+//   res.render('reps', {
+//     json: json
+//   })
+// }
 
 server = app.listen(3000, function() {
   var host = server.address().address,

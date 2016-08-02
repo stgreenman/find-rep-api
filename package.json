@@ -12,9 +12,14 @@
     "url": "https://github.com/hillmanov/find-rep-api.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/hillmanov/find-rep-api/issues"
   },
-  "homepage": "https://github.com/hillmanov/find-rep-api"
+  "homepage": "https://github.com/hillmanov/find-rep-api",
+  "dependencies": {
+    "nodemon": "~1.10.0",
+    "angular-material": "~1.1.0-rc.5"
+  },
+  "devDependencies": {}
 }

@@ -1,0 +1,168 @@
+<html>
+  <head>
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.0.9/angular-material.css">
+    <!-- <link rel="stylesheet" href="https://material.angularjs.org/1.0.9/docs.css"> -->
+
+
+
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+    <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.0.9/angular-material.js"></script> -->
+
+    <!-- Angular Material Library -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.js"></script> --> -->
+
+
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+		<script src="node_modules/angular-aria/angular-aria.js"></script>
+		<!--<script src="node_modules/angular-messages/angular-messages.js"></script>-->
+		<script src="node_modules/angular-material/angular-material.js"></script>
+
+    <!-- local -->
+    <script src="app.js"></script>
+
+    <body>
+      Hey it's me
+
+
+<div class="container" ng-app="sortApp" ng-controller="mainController">
+
+<div>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+
+      <md-tab  label="one">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab One</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+
+
+
+
+
+  <div class="alert alert-info">
+    <p>Sort Column: {{ sortColumn }}</p>
+    <p>Sort Order: {{ sortOrder }}</p>
+    <p>Search Query: {{ searchCompanies }}</p>
+  </div>
+
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+        <input type="text" class="form-control" placeholder="Search Companies" ng-model="searchCompanies">
+
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+        <td>
+
+        <td>
+          <a href='#' ng-click="sortColumn = 'name'; sortOrder = !sortOrder">
+            Company
+            <span class="fa fa-caret-down" ng-show="sortColumn == 'name' && sortOrder"></span>
+            <span class="fa fa-caret-up" ng-show="sortColumn == 'name' && !sortOrder"></span>
+          </a>
+        </td>
+        <td>
+          <a href='#' ng-click="sortColumn = 'name'; sortOrder = !sortOrder">
+            Type
+            <span class="fa fa-caret-down" ng-show="sortColumn == 'name' && sortOrder"></span>
+            <span class="fa fa-caret-up" ng-show="sortColumn == 'name' && !sortOrder"></span>
+          </a>
+        </td>
+
+        <td>
+          <a href='#' ng-click="sortColumn = 'avgCom'; sortOrder = !sortOrder">
+            Avg. Commission
+            <span class="fa fa-caret-down" ng-show="sortColumn == 'avgCom' && sortOrder"></span>
+            <span class="fa fa-caret-up" ng-show="sortColumn == 'avgCom' && !sortOrder"></span>
+        </td>
+        <td>
+          <a href='#' ng-click="sortColumn = 'avgSales'; sortOrder = !sortOrder">
+            Avg. Sales
+            <span class="fa fa-caret-down" ng-show="sortColumn == 'avgSales' && sortOrder"></span>
+            <span class="fa fa-caret-up" ng-show="sortColumn == 'avgSales' && !sortOrder"></span>
+        </td>
+        <td>
+          <a href='#' ng-click="sortColumn = 'avgSales'; sortOrder = !sortOrder">
+            Location
+            <span class="fa fa-caret-down" ng-show="sortColumn == 'avgSales' && sortOrder"></span>
+            <span class="fa fa-caret-up" ng-show="sortColumn == 'avgSales' && !sortOrder"></span>
+        </td>
+        <td>
+          <a href='#' ng-click="sortColumn = 'avgSales'; sortOrder = !sortOrder">
+            Rating
+            <span class="fa fa-caret-down" ng-show="sortColumn == 'avgSales' && sortOrder"></span>
+            <span class="fa fa-caret-up" ng-show="sortColumn == 'avgSales' && !sortOrder"></span>
+        </td>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="c in companies | orderBy:sortColumn:sortOrder | filter:searchCompanies">
+        <td class = "column-cropper">
+          <a ui-sref="app.page.profile" class="pull-left m-r">
+            <div class="image-cropper">
+              <img ng-src="http://flatfull.com/themes/materil/angular/images/a10.jpg" ng-style="avatar_style">
+          </div>
+          </a>
+        </td>
+        <td>{{ c.name }}</td>
+        <td>{{ c.type }}</td>
+        <td>{{ c.avgCom }}</td>
+        <td>{{ c.avgSales }}</td>
+
+
+        <td>{{ c.location }}</td>
+        <td>{{ c.rating }}</td>
+
+
+      </tr>
+    </tbody>
+
+  </table>
+</md-content>
+</md-tab>
+
+
+
+  <md-tab label="two">
+    <md-content class="md-padding">
+      <h1 class="md-display-2">Tab Two</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis </p>
+
+
+      <div ng-app="myApp" ng-controller="customersCtrl">
+        <div ng-include="'Review.html'"></div>
+      </div>
+
+
+    </md-content>
+  </md-tab>
+
+
+    </body>
+  </head>
+</html>
