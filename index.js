@@ -2,12 +2,14 @@
     request = require('request'),
      app     = express(),
      server;
+
+ var static = require('serve-static');
 //
 // app.engine('ejs', require('ejs').renderFile);
 // app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public'));
-
+ // app.use(serve-static(__dirname, {index: [home.html]}))
 
 
 
@@ -23,7 +25,7 @@ app.get('/senators/:state',
   jsonResponse
 );
 
-app.get('*', function(req, res, next){
+app.get('/', function(req, res, next){
   res.sendfile('./public/home.html')
 });
 

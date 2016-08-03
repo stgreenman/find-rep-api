@@ -74,82 +74,75 @@ console.log("yellow")
        console.log("error " + e)
      }
   );
-}])
+}]);
 
-.controller('AppCtrl', function($scope) {
-    var imagePath = 'img/list/60.jpeg';
 
-    $scope.phones = [
-      {
-        type: 'Home',
-        number: '(555) 251-1234',
-        options: {
-          icon: 'communication:phone'
-        }
-      },
-      {
-        type: 'Cell',
-        number: '(555) 786-9841',
-        options: {
-          icon: 'communication:phone',
-          avatarIcon: true
-        }
-      },
-      {
-        type: 'Office',
-        number: '(555) 314-1592',
-        options: {
-          face : imagePath
-        }
-      },
-      {
-        type: 'Offset',
-        number: '(555) 192-2010',
-        options: {
-          offset: true,
-          actionIcon: 'communication:phone'
-        }
-      }
-    ];
-    $scope.todos = [
-      {
-        face : imagePath,
-        what: 'Brunch this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
-      },
-      {
-        face : imagePath,
-        what: 'Brunch this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
-      },
-      {
-        face : imagePath,
-        what: 'Brunch this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
-      },
-      {
-        face : imagePath,
-        what: 'Brunch this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
-      },
-      {
-        face : imagePath,
-        what: 'Brunch this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
-      },
-    ];
-});
-
+// .directive("mapClick", function() {
+//   return {
+//     restrict: "A",
+//     link: function(){
+//       alert("Howdy!");
+//
+//
+//
+//
+//   $(document).ready(function() {
+//     $('#map').usmap({
+//       'stateSpecificStyles': {
+//         'AK' : {fill: '#f00'}
+//       },
+//       'stateSpecificHoverStyles': {
+//         'HI' : {fill: '#ff0'}
+//       },
+//
+//       'mouseoverState': {
+//         'HI' : function(event, data) {
+//           //return false;
+//         }
+//       },
+//
+//
+//       'click' : function(event, data) {
+//         $('#alert')
+//           .text('Click '+data.name+' on map 1')
+//           .stop()
+//           .css('backgroundColor', '#ff0')
+//           .animate({backgroundColor: '#ddd'}, 1000);
+//       }
+//     });
+//
+//     // $('#map2').usmap({
+//     //   'stateStyles': {
+//     //     fill: '#025',
+//     //     "stroke-width": 1,
+//     //     'stroke' : '#036'
+//     //   },
+//     //   'stateHoverStyles': {
+//     //     fill: 'teal'
+//     //   },
+//     //
+//     //   'click' : function(event, data) {
+//     //     $('#alert')
+//     //       .text('Click '+data.name+' on map 2')
+//     //       .stop()
+//     //       .css('backgroundColor', '#af0')
+//     //       .animate({backgroundColor: '#ddd'}, 1000);
+//     //   }
+//     // });
+//
+//     $('#over-md').click(function(event){
+//       $('#map').usmap('trigger', 'MD', 'mouseover', event);
+//     });
+//
+//     $('#out-md').click(function(event){
+//       $('#map').usmap('trigger', 'MD', 'mouseout', event);
+//     });
+//   });
+//
+// }
+//
+// }
+// });
 
 function logArrayElements(element, index, array) {
   console.log('a[' + index + '] = ' + element.fName);
