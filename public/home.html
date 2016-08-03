@@ -1,12 +1,118 @@
 <html>
 <head>
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.0.9/angular-material.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+
+<style>
+.listdemoBasicUsage md-divider {
+  margin-top: 10px;
+  margin-bottom: 0; }
+</style>
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 
   <script src="app.js"></script>
 </head>
-<body ng-app='myApp' ng-controller="myController">
-  hey this is home>
 
-{{name}}
+<body ng-app='myApp' ng-controller="myCtrl" >
+
+<br>
+<br>
+
+<div layout="row" layout-align="center center" layout-xs="column">
+
+  <div flex="10"></div>
+
+  <div flex >
+    I'm above on mobile, and to the left on larger devices.
+
+    <md-toolbar layout="column" class="md-hue-3">
+
+
+    <md-subheader class="md-no-sticky">  {{repType}} </md-subheader>
+    <md-list-item class="md-2-line" ng-repeat="rep in representatives">
+      <md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
+      <img ng-src="{{phone.options.face}}?25" class="md-avatar" alt="{{phone.options.face}}" ng-if="phone.options.face">
+      <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+      <h3>
+        <button ng-click="setName(rep.name)"> {{ rep.name }} </button>
+      </h3>
+      <p> {{ rep.party }} </p>
+    </div>
+      <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
+        <md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
+      </md-button>
+    </md-list-item>
+  </md-list>
+  </md-content>
+  </div>
+
+<div flex="10"></div>
+
+  <div flex>
+    <p ng-hide = hide> Click on a Congressman to the left </p>
+
+
+    <md-toolbar layout="column" class="md-hue-3">
+
+
+  <md-subheader class="md-no-sticky"></md-subheader>
+  <md-list-item class="md-2-line" ng-repeat="rep in representatives | filter : repSelected">
+    <md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
+    <img ng-src="{{phone.options.face}}?25" class="md-avatar" alt="{{phone.options.face}}" ng-if="phone.options.face">
+    <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+      <h2> {{ rep.fName }} {{ rep.lName }} </h2>
+      <p> District: {{ rep.district }} </p>
+      <p> Phone: {{ rep.phone }} </p>
+      <p> Office: {{ rep.office }} </p>
+      <p> Website: <a ng-href="{{ rep.link }}""> {{rep.link}} </a> </p>
+
+    </div>
+    <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
+      <md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
+    </md-button>
+  </md-list-item>
+  </md-list>
+  </md-content>
+  </div>
+
+  <div flex="10"></div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
