@@ -52,71 +52,29 @@
 
 
 
-
-
-  <script>
-	$(document).ready(function() {
-	  $('#map').usmap({
-	    'stateSpecificStyles': {
-	      'AK' : {fill: '#f00'}
-	    },
-	    'stateSpecificHoverStyles': {
-	      'HI' : {fill: '#ff0'}
-	    },
-
-	    'mouseoverState': {
-	      'HI' : function(event, data) {
-	        //return false;
-	      }
-	    },
-
-
-	    'click' : function(event, data) {
-	      $('#alert')
-	        .text('Click '+data.name+' on map 1')
-	        .stop()
-	        .css('backgroundColor', '#ff0')
-	        .animate({backgroundColor: '#ddd'}, 1000);
-	    }
-	  });
-
-	  // $('#map2').usmap({
-	  //   'stateStyles': {
-	  //     fill: '#025',
-	  //     "stroke-width": 1,
-	  //     'stroke' : '#036'
-	  //   },
-	  //   'stateHoverStyles': {
-	  //     fill: 'teal'
-	  //   },
-    //
-	  //   'click' : function(event, data) {
-	  //     $('#alert')
-	  //       .text('Click '+data.name+' on map 2')
-	  //       .stop()
-	  //       .css('backgroundColor', '#af0')
-	  //       .animate({backgroundColor: '#ddd'}, 1000);
-	  //   }
-	  // });
-
-	  $('#over-md').click(function(event){
-	    $('#map').usmap('trigger', 'MD', 'mouseover', event);
-	  });
-
-	  $('#out-md').click(function(event){
-	    $('#map').usmap('trigger', 'MD', 'mouseout', event);
-	  });
-	});
-	</script>
+<!-- <div id="CA" style="display:show;">shhdfsdf</div> -->
 
 
 
 
+  <h2>
+    <div id="alert" align='center'>US Congressmen</div>
+  </h2>
+  <div align='center' >
+    <button class="typeRep" ng-click="repType='Representatives'" map-click>
+      Representatives
+    </button>
+    <button class="typeRep" ng-click="repType='Senators'" map-click>
+      Senators
+    </button>
+  </div>
 
-
-  <div id="alert">Click alerts</div>
-
-  <div id="map" style="width: 930px; height: 630px;"></div>
+  <div align='center'>
+    <div id="map" style="width: 700px; height: 474px;" ></div>
+  <div>
+  <h2>
+    <div id="stateSelected" style="display:show;" ng-bind="stateClicked" align="center">Select a State</div>
+  </h2>
 
   <!-- <button id="over-md">mouseover MD</button> <button id="out-md">mouseout MD</button> -->
   <!-- <div id="map2" style="width: 300px; height: 300px;"></div> -->
@@ -133,32 +91,36 @@
 <br>
 <br>
 
-<div layout="row" layout-align="center center" layout-xs="column">
+
+<div layout="row" layout-align="center" layout-xs="column">
 
   <div flex="10"></div>
 
   <div flex >
-    I'm above on mobile, and to the left on larger devices.
+
 
     <md-toolbar layout="column" class="md-hue-3">
-
-
+<md-content>
+  <md-list>
     <md-subheader class="md-no-sticky">  {{repType}} </md-subheader>
     <md-list-item class="md-2-line" ng-repeat="rep in representatives">
       <md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
+
       <img ng-src="{{phone.options.face}}?25" class="md-avatar" alt="{{phone.options.face}}" ng-if="phone.options.face">
       <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
-      <h3>
-        <button ng-click="setName(rep.name)"> {{ rep.name }} </button>
-      </h3>
-      <p> {{ rep.party }} </p>
-    </div>
+        <h3>
+          <button ng-click="setName(rep.name)"> {{ rep.name }} </button>
+        </h3>
+        <p> {{ rep.party }} </p>
+      </div>
+
       <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
         <md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
       </md-button>
     </md-list-item>
   </md-list>
   </md-content>
+
   </div>
 
 <div flex="10"></div>
@@ -179,7 +141,7 @@
       <p> District: {{ rep.district }} </p>
       <p> Phone: {{ rep.phone }} </p>
       <p> Office: {{ rep.office }} </p>
-      <p> Website: <a ng-href="{{ rep.link }}""> {{rep.link}} </a> </p>
+      <p> Website: <a ng-href="{{ rep.link }}"> {{rep.link}} </a> </p>
 
     </div>
     <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
@@ -191,7 +153,6 @@
   </div>
 
   <div flex="10"></div>
-
 
 
 </div>
