@@ -1,73 +1,59 @@
 <html>
 <head>
   <!-- CSS -->
-  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css"> -->
-  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.0.9/angular-material.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="/css/angular-material.min.css">
+  <link rel="stylesheet" href="/css/style.css">
 
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-
-
-<link rel="stylesheet" href="/css/angular-material.min.css">
-<script src="/javascript/angular.min.js"></script>
-<script src="/javascript/angular-animate.min.js"></script>
-<script src="/javascript/angular-aria.min.js"></script>
-<!-- <script src="/javascript/angular-messages.js"></script> -->
-<script src="/javascript/angular-material.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-
-
-
-<style>
-.listdemoBasicUsage md-divider {
-  margin-top: 10px;
-  margin-bottom: 0; }
-</style>
-<style>
-  #alert {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    background-color: #ddd;
-    color: #333;
-    padding: 5px;
-    font-weight: bold;
-  }
-</style>
-
-
-
-
+  <!-- JS -->
+  <script src="/javascript/angular.min.js"></script>
+  <script src="/javascript/angular-animate.min.js"></script>
+  <script src="/javascript/angular-aria.min.js"></script>
+  <!-- <script src="/javascript/angular-messages.js"></script> -->
+  <script src="/javascript/angular-material.min.js"></script>
 
   <script src="javascript/raphael.js"></script>
-  <!-- <script src="scale.raphael.js"></script> -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <script src="javascript/color.jquery.js"></script>
   <script src="javascript/jquery.usmap.js"></script>
 
   <script src="app.js"></script>
+
 </head>
 
 <body ng-app='myApp' ng-controller="myCtrl" >
 
 
-
-<!-- <div id="CA" style="display:show;">shhdfsdf</div> -->
-
-
-
-
   <h2>
-    <div id="alert" align='center'>US Congressmen</div>
+    <div id="alert" align='center'>Select a State</div>
   </h2>
-  <div align='center' >
-    <button class="typeRep" ng-click="repType='Representatives'" map-click>
-      Representatives
-    </button>
-    <button class="typeRep" ng-click="repType='Senators'" map-click>
-      Senators
-    </button>
+
+  <div layout="row" layout-xs="column">
+
+    <!-- <div flex="10"></div> -->
+
+    <div flex align="right" >
+      <a>
+        <ul align ="left" id="repButton" class="typeRep buttonBoxes repBox " ng-click="changeRepButton()"  map-click>
+          Representatives</ul>
+      </a>
+    </div>
+
+    <div flex="10"></div>
+
+    <div flex align="left">
+      <a>
+        <ul align ="left" id="senatorButton" class="typeRep buttonBoxes" ng-click="changeSenatorButton()" map-click>
+          <a class="whiteSpace">____<a>Senators</a></ul>
+      </a>
+    </div>
+
+    <!-- <div flex="10"></div> -->
+
   </div>
+
+  <br>
 
   <div align='center'>
     <div id="map" style="width: 700px; height: 474px;" ></div>
@@ -76,111 +62,54 @@
     <div id="stateSelected" style="display:show;" ng-bind="stateClicked" align="center">Select a State</div>
   </h2>
 
-  <!-- <button id="over-md">mouseover MD</button> <button id="out-md">mouseout MD</button> -->
-  <!-- <div id="map2" style="width: 300px; height: 300px;"></div> -->
-
-
-
-
-
-
-
-
-
-
 <br>
 <br>
 
 
-<div layout="row" layout-align="center" layout-xs="column">
+<div layout="row"  layout-xs="column">
 
   <div flex="10"></div>
 
-  <div flex >
 
+  <div flex align="left">
+    <ul  class="leftBoxes" id="labelSpace">
+      <div  align="left">{{repType}}</div>
+    </ul>
 
-    <md-toolbar layout="column" class="md-hue-3">
-<md-content>
-  <md-list>
-    <md-subheader class="md-no-sticky">  {{repType}} </md-subheader>
-    <md-list-item class="md-2-line" ng-repeat="rep in representatives">
-      <md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
-
-      <img ng-src="{{phone.options.face}}?25" class="md-avatar" alt="{{phone.options.face}}" ng-if="phone.options.face">
-      <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
-        <h3>
-          <button ng-click="setName(rep.name)"> {{ rep.name }} </button>
-        </h3>
-        <p> {{ rep.party }} </p>
-      </div>
-
-      <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
-        <md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
-      </md-button>
-    </md-list-item>
-  </md-list>
-  </md-content>
-
+    <ul class="leftBoxes" ng-repeat="rep in representatives">
+          <h3>
+            <div ng-click="setName(rep.name)"> {{ rep.name }} {{ rep.party }} </div>
+          </h3>
+    </ul>
   </div>
 
 <div flex="10"></div>
 
-  <div flex>
-    <p ng-hide = hide> Click on a Congressman to the left </p>
-
-
-    <md-toolbar layout="column" class="md-hue-3">
-
-
-  <md-subheader class="md-no-sticky"></md-subheader>
-  <md-list-item class="md-2-line" ng-repeat="rep in representatives | filter : repSelected">
-    <md-icon md-svg-icon="{{phone.options.icon}}" ng-if="phone.options.icon" ng-class="{'md-avatar-icon': phone.options.avatarIcon}"></md-icon>
-    <img ng-src="{{phone.options.face}}?25" class="md-avatar" alt="{{phone.options.face}}" ng-if="phone.options.face">
-    <div class="md-list-item-text" ng-class="{'md-offset': phone.options.offset }">
+  <div flex align= "left">
+ 
+<div ng-repeat="rep in representatives | filter : repSelected">
+    <ul class="rightBoxes">
       <h2> {{ rep.fName }} {{ rep.lName }} </h2>
+    </ul>
+    <ul class="rightBoxes">
       <p> District: {{ rep.district }} </p>
+    </ul>
+    <ul class="rightBoxes">
       <p> Phone: {{ rep.phone }} </p>
+    </ul>
+    <ul class="rightBoxes">
       <p> Office: {{ rep.office }} </p>
+    </ul>
+    <ul class="rightBoxes">
       <p> Website: <a ng-href="{{ rep.link }}"> {{rep.link}} </a> </p>
+    </ul>
 
-    </div>
-    <md-button class="md-secondary md-icon-button" ng-click="doSecondaryAction($event)" ng-if="phone.options.actionIcon" aria-label="call">
-      <md-icon md-svg-icon="{{phone.options.actionIcon}}"></md-icon>
-    </md-button>
-  </md-list-item>
-  </md-list>
-  </md-content>
+
+  </div>
   </div>
 
   <div flex="10"></div>
 
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

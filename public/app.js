@@ -1,7 +1,3 @@
-// angular.module('myApp',[])
-//
-
-
 var sampleApp = angular.module('myApp', [])
 
 .controller('myCtrl', ['$scope', '$http', function($scope,  $http){
@@ -11,12 +7,48 @@ var sampleApp = angular.module('myApp', [])
   $scope.hide = false;
   $scope.repType = 'Representatives';
   $scope.repSelected = "UT";
+  $scope.stateSelected = "UT";
   $scope.data = '';
   $scope.setName = function(name){
     $scope.hide = true;
     $scope.repSelected = name;
   }
   $scope.congressType = "Representatives"
+
+  $scope.changeSenatorButton = function(){
+    $scope.repType = "Senators";
+
+    $('#senatorButton').click(function() {
+
+      $('#senatorButton').css({
+        'background-color' : '#F0F0F0'
+      })
+
+      $('#repButton').css({
+        'background-color' : 'white',
+      })
+
+      // $('#repButton').addClass('ul.c1:hover')
+    })
+  };
+
+  $scope.changeRepButton = function(){
+    $scope.repType = "Representatives";
+
+    $('#repButton').click(function() {
+
+        $('#repButton').css({
+          'background-color' : '#F0F0F0'
+        })
+
+        $('#senatorButton').css({
+          'background-color' : 'transparent'
+        })
+
+        // $('#senatorButton').addClass('ul.c1:hover')
+
+    })
+  };
 
 }])
 
@@ -41,29 +73,25 @@ var sampleApp = angular.module('myApp', [])
 
         $('#map').usmap({
           'stateSpecificStyles': {
-            'AK' : {fill: '#f00'}
+            // 'UT' : {fill: '#f00'},
+            // 'AR' : {fill: "#33c"}
           },
+
           'stateSpecificHoverStyles': {
-            'HI' : {fill: '#ff0'}
+            // 'HI' : {fill: '#ff0'},
+            // 'CO' : {fill: '#f00'}
           },
 
           'mouseoverState': {
-            'HI' : function(event, data) {
-              //return false;
-          }
-        },
+            // 'HI' : function(event, data) {
+            //   data.backgroundColor = '#33c';
+            // }
+          },
+
+         
 
 
-        'click' : function(event, data) {
-          $('#alert')
-            .text('Click '+data.name+' on map 148975345')
-            .stop()
-            .css('backgroundColor', '#ff0')
-            .animate({backgroundColor: '#ddd'}, 1000);
-        },
-        'click' : function(event, data){
-
-          // stateDiv = "#".concat(data.name);
+        'click' : function(event, data) {      
           stateSymbol = "".concat(data.name);
           $('#stateSelected').text(stateSymbol)
           $scope.stateSelected = stateSymbol;
@@ -111,6 +139,7 @@ var sampleApp = angular.module('myApp', [])
               // console.log(rep.link)
               console.log("rep" + rep.fName)
               $scope.representatives.push(rep)
+              
 
 
               console.log("reps so far --" + $scope.representatives.forEach(logArrayElements))
@@ -147,13 +176,8 @@ function logArrayElements(element, index, array) {
 
 function updateReps(stateAbr, rType, http, $scope){
 
-  // stateSymbol = "".concat(data.name);
-  // $('#stateSelected').text(stateSymbol)
-  // $scope.stateSelected = stateSymbol
 
-
-
-  var url = 'http://localhost:3000/' + rType + '/'+ stateAbr + '?callback=JSON_CALLBACK';
+  var url = 'http://localhost:3000/' + $scope.repType + '/'+ $scope.stateSelected + '?callback=JSON_CALLBACK';
 
 
   http.jsonp(url).then(
@@ -161,7 +185,6 @@ function updateReps(stateAbr, rType, http, $scope){
      var results = s.data[0].results,
       repObject = {};
 
-// alert ('results' + results)
 
       $scope.representatives.length = 0;
     console.log("length"+ results.length)
